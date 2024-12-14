@@ -7,6 +7,8 @@ interface Scopes {
   [key: string]: string;
 }
 
+export const maxDuration = 30;
+
 export async function GET(req: NextRequest) {
   if (
     req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`
