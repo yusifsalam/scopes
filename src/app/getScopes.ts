@@ -1,3 +1,5 @@
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 import * as cheerio from "cheerio";
 
 interface Scopes {
@@ -51,15 +53,17 @@ export async function getScopes() {
       }
     });
 
-    // const { text } = await generateText({
-    //   model: openai("gpt-4-turbo"),
-    //   system:
-    //     "Your task is to translate horoscopes from Finnish to English given input JSON.",
-    //   prompt: JSON.stringify(scopes),
-    // });
+    const { text: translatedScopeText } = await generateText({
+      model: openai("gpt-4-turbo"),
+      system:
+        "Your task is to translate horoscopes from Finnish to English given input JSON.",
+      prompt: JSON.stringify(scopes),
+    });
+    const translatedScopes = JSON.parse(translatedScopeText);
 
     return {
       scopes,
+      translatedScopes,
     };
   } catch (error) {
     console.error(error);
