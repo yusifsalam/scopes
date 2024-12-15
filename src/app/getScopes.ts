@@ -54,7 +54,7 @@ export async function getScopes() {
     });
 
     const { text: translatedScopeText } = await generateText({
-      model: openai("gpt-4-turbo"),
+      model: openai("gpt-4o-mini"),
       system:
         "Your task is to translate horoscopes from Finnish to English given input JSON.",
       prompt: JSON.stringify(scopes),
