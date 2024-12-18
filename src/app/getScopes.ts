@@ -1,3 +1,4 @@
+import { createClient } from "@/supabase/server";
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import * as cheerio from "cheerio";
@@ -49,7 +50,7 @@ export async function getScopes() {
       const text = targetPage(element).next("p.article-body").text().trim();
 
       if (sign && text) {
-        scopes[sign] = text;
+        scopes[sign.toLowerCase()] = text;
       }
     });
 
@@ -60,6 +61,33 @@ export async function getScopes() {
       prompt: JSON.stringify(scopes),
     });
     const translatedScopes = JSON.parse(translatedScopeText);
+    const client = await createClient()
+    const signIds = {
+      capricorn: 1,
+      aquarius: 2,
+      pisces: 3,
+      aries: 4,
+      taurus: 5,
+      gemini: 6,
+      cancer: 7,
+      leo: 8,
+      virgo: 9,
+      libra: 10,
+      scorpio: 11,
+      sagittarius: 12
+    }
+    const { data, error } = await client
+      .from('horoscopes')
+      .insert(
+        Object.entries(translatedScopes).map(([sign, scope]) => ({
+          sign_id: signIds[sign as keyof typeof signIds],
+          date: new Date().toISOString().split('T')[0],
+          scope
+        }))
+      )
+      .select()
+
+    console.log('data', data, 'error', error)
 
     return {
       scopes,
