@@ -60,8 +60,7 @@ export async function getScopes() {
         "Your task is to translate horoscopes from Finnish to English given input JSON.",
       prompt: JSON.stringify(scopes),
     });
-    const translatedScopes = JSON.parse(translatedScopeText);
-    const client = await createClient()
+
     const signIds = {
       capricorn: 1,
       aquarius: 2,
@@ -74,20 +73,29 @@ export async function getScopes() {
       virgo: 9,
       libra: 10,
       scorpio: 11,
-      sagittarius: 12
-    }
+      sagittarius: 12,
+    };
+    type ZodiacSign = keyof typeof signIds;
+    type TranslatedScopes = {
+      [key in ZodiacSign]: string;
+    };
+    const translatedScopes: TranslatedScopes = JSON.parse(translatedScopeText);
+
+    console.log(translatedScopes);
+    const client = await createClient();
+
     const { data, error } = await client
-      .from('horoscopes')
+      .from("horoscopes")
       .insert(
         Object.entries(translatedScopes).map(([sign, scope]) => ({
           sign_id: signIds[sign as keyof typeof signIds],
-          date: new Date().toISOString().split('T')[0],
-          scope
-        }))
+          date: new Date().toISOString().split("T")[0],
+          scope,
+        })),
       )
-      .select()
+      .select();
 
-    console.log('data', data, 'error', error)
+    console.log("data", data, "error", error);
 
     return {
       scopes,
