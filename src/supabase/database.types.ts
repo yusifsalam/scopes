@@ -87,7 +87,15 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      scopes_today: {
+        Row: {
+          date: string | null
+          id: number | null
+          scope: string | null
+          sign: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

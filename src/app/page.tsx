@@ -4,29 +4,21 @@ type Scope = {
   id: number;
   scope: string;
   date: string;
-  signs: {
-    name: string;
-  };
+  sign: string;
 };
 
 export default async function IndexPage() {
   const supabase = await createClient();
-  const { data: scopes } = await supabase
-    .from("horoscopes")
-    .select(
-      `
+  const { data: scopes } = await supabase.from("scopes_today").select(
+    `
         id,
         scope,
         date,
-        signs (
-          name
-        )
+        sign
       `,
-    )
-    .eq("date", new Date().toISOString().split("T")[0])
-    .order("sign_id");
+  );
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch p-2">
       <h1>Rektor &apos;scopes for {new Date().toDateString()}</h1>
       <ul className="space-y-2 mt-2">
         {scopes?.map((s) => <SingleScope key={s.id} scope={s as Scope} />)}
@@ -38,7 +30,7 @@ export default async function IndexPage() {
 const SingleScope = ({ scope }: { scope: Scope }) => {
   return (
     <div>
-      <h2 className="font-bold uppercase">{scope.signs.name}</h2>
+      <h2 className="font-bold uppercase">{scope.sign}</h2>
       <p>{scope.scope} </p>
     </div>
   );

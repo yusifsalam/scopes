@@ -11,7 +11,6 @@ CREATE TABLE sign_localizations
     sign_id INTEGER REFERENCES signs (id),
     locale  TEXT NOT NULL,
     value   TEXT NOT NULL,
-
     UNIQUE (sign_id, locale)
 );
 
@@ -21,8 +20,9 @@ CREATE TABLE horoscopes
     sign_id    INTEGER REFERENCES signs (id),
     date       DATE NOT NULL,
     scope      TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-
+    created_at TIMESTAMP
+                   WITH
+                   TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (sign_id, date)
 );
 
@@ -43,7 +43,6 @@ VALUES ('capricorn'),
        ('scorpio'),
        ('sagittarius');
 
-
 INSERT INTO sign_localizations (sign_id, locale, value)
 VALUES (1, 'fi', 'kauris'),
        (2, 'fi', 'vesimies'),
@@ -57,3 +56,28 @@ VALUES (1, 'fi', 'kauris'),
        (10, 'fi', 'vaaka'),
        (11, 'fi', 'skorpioni'),
        (12, 'fi', 'jousimies');
+
+INSERT INTO sign_localizations (sign_id, locale, value)
+VALUES (1, 're', 'capricorn'),
+       (2, 're', 'aquarius'),
+       (3, 're', 'pisces fishes'),
+       (4, 're', 'ram'),
+       (5, 're', 'bull'),
+       (6, 're', 'twin'),
+       (7, 're', 'crab'),
+       (8, 're', 'lion'),
+       (9, 're', 'virgin'),
+       (10, 're', 'horizontal'),
+       (11, 're', 'scorpion'),
+       (12, 're', 'centaur');
+
+CREATE VIEW scopes_today AS
+SELECT h.id,
+       h.date,
+       h.scope,
+       sl.value AS "sign"
+FROM horoscopes h
+         JOIN signs s ON h.sign_id = s.id
+         JOIN sign_localizations sl ON s.id = sl.sign_id
+WHERE sl.locale = 're'
+  AND h.date = CURRENT_DATE;
