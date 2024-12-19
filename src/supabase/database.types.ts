@@ -41,6 +41,21 @@ export type Database = {
           },
         ]
       }
+      scope_updates: {
+        Row: {
+          id: number
+          updated_at: string | null
+        }
+        Insert: {
+          id?: number
+          updated_at?: string | null
+        }
+        Update: {
+          id?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       sign_localizations: {
         Row: {
           id: number

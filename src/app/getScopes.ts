@@ -81,10 +81,8 @@ export async function getScopes() {
     };
     const translatedScopes: TranslatedScopes = JSON.parse(translatedScopeText);
 
-    console.log(translatedScopes);
     const client = await createClient();
-
-    const { data, error } = await client
+    const { error: scopeError } = await client
       .from("horoscopes")
       .insert(
         Object.entries(translatedScopes).map(([sign, scope]) => ({
@@ -94,9 +92,19 @@ export async function getScopes() {
         })),
       )
       .select();
+    if (scopeError) {
+      return { error: scopeError };
+    }
 
-    console.log("data", data, "error", error);
+    const { error: updateTableError } = await client
+      .from("scope_updates")
+      .insert([{}])
+      .select()
+      .single();
 
+    if (updateTableError) {
+      return { error: updateTableError };
+    }
     return {
       scopes,
       translatedScopes,
