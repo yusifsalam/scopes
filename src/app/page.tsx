@@ -18,9 +18,9 @@ export default async function IndexPage() {
       `,
   );
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch p-2">
+    <div className="stretch mx-auto flex w-full max-w-md flex-col px-4 py-8">
       <h1>Rektor &apos;scopes for {new Date().toDateString()}</h1>
-      <ul className="space-y-2 mt-2">
+      <ul className="mt-2 space-y-2">
         {scopes?.map((s) => <SingleScope key={s.id} scope={s as Scope} />)}
       </ul>
     </div>
