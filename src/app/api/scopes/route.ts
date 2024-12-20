@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   const { error } = await getScopes();
   if (error) {
-    return NextResponse.json({ ok: false });
+    return NextResponse.json({ ok: false, error }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });
