@@ -81,7 +81,7 @@ export async function getScopes() {
     };
     const translatedScopes: TranslatedScopes = JSON.parse(translatedScopeText);
 
-    const client = await createClient();
+    const client = await createClient("admin");
     const { error: scopeError } = await client
       .from("horoscopes")
       .insert(

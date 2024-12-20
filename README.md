@@ -17,6 +17,7 @@ The app is deployed to Vercel.
 | `BASE_URL`                      | The base URL of the scope source                                                     |
 | `SCOPES_ROUTE`                  | Route of the scopes page at source                                                   |
 | `CRON_SECRET`                   | Secret key used for securing cron job endpoints or verifying cron job requests.      |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Service key to bypass RLS policy                                                     |
 | `NEXT_PUBLIC_SUPABASE_URL`      | Public URL of your Supabase project.                                                 |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public anonymous key for Supabase.                                                   |
 
