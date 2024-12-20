@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Daily 'scopes",
-  description: "Daily 'scopes",
+  description: "Daily 'scopes serves you fresh 'scopes every day.",
 };
 
 export default function RootLayout({
