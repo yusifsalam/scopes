@@ -7,6 +7,27 @@ interface Scopes {
   [key: string]: string;
 }
 
+const signIds = {
+  capricorn: 1,
+  aquarius: 2,
+  pisces: 3,
+  aries: 4,
+  taurus: 5,
+  gemini: 6,
+  cancer: 7,
+  leo: 8,
+  virgo: 9,
+  libra: 10,
+  scorpio: 11,
+  sagittarius: 12,
+};
+
+export type ZodiacSign = keyof typeof signIds;
+
+type TranslatedScopes = {
+  [key in ZodiacSign]: string;
+};
+
 export async function getScopes() {
   try {
     const sourceURL = `${process.env.BASE_URL}${process.env.SCOPES_ROUTE}`;
@@ -61,24 +82,6 @@ export async function getScopes() {
       prompt: JSON.stringify(scopes),
     });
 
-    const signIds = {
-      capricorn: 1,
-      aquarius: 2,
-      pisces: 3,
-      aries: 4,
-      taurus: 5,
-      gemini: 6,
-      cancer: 7,
-      leo: 8,
-      virgo: 9,
-      libra: 10,
-      scorpio: 11,
-      sagittarius: 12,
-    };
-    type ZodiacSign = keyof typeof signIds;
-    type TranslatedScopes = {
-      [key in ZodiacSign]: string;
-    };
     const translatedScopes: TranslatedScopes = JSON.parse(translatedScopeText);
 
     const client = await createClient("admin");
