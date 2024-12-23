@@ -13,7 +13,7 @@ const Scopes = ({ data }: ScopesProps) => {
     <div>
       <ul className="mt-2 space-y-2">
         {data.map((s) => (
-          <li key={s.id}>
+          <li key={s.id} className="list-none">
             <SingleScope scope={s} />
           </li>
         ))}
