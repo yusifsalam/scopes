@@ -36,6 +36,13 @@ export type Database = {
             foreignKeyName: "horoscopes_sign_id_fkey"
             columns: ["sign_id"]
             isOneToOne: false
+            referencedRelation: "scopes_today"
+            referencedColumns: ["signId"]
+          },
+          {
+            foreignKeyName: "horoscopes_sign_id_fkey"
+            columns: ["sign_id"]
+            isOneToOne: false
             referencedRelation: "signs"
             referencedColumns: ["id"]
           },
@@ -80,6 +87,13 @@ export type Database = {
             foreignKeyName: "sign_localizations_sign_id_fkey"
             columns: ["sign_id"]
             isOneToOne: false
+            referencedRelation: "scopes_today"
+            referencedColumns: ["signId"]
+          },
+          {
+            foreignKeyName: "sign_localizations_sign_id_fkey"
+            columns: ["sign_id"]
+            isOneToOne: false
             referencedRelation: "signs"
             referencedColumns: ["id"]
           },
@@ -108,6 +122,7 @@ export type Database = {
           id: number | null
           scope: string | null
           sign: string | null
+          signId: number | null
         }
         Relationships: []
       }

@@ -13,6 +13,7 @@ export type Database = MergeDeep<
             date: string;
             scope: string;
             sign: string;
+            signId: number;
           };
         };
       };
