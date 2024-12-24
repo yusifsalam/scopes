@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { UserPreferencesStoreProvider } from "./state/user-preferences-provider";
 import "./globals.css";
+import Footer from "./components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Daily 'scopes",
@@ -19,6 +20,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <UserPreferencesStoreProvider>{children}</UserPreferencesStoreProvider>
+        <Footer />
       </body>
     </html>
   );
