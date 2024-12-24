@@ -11,9 +11,9 @@ const Scopes = ({ data }: ScopesProps) => {
 
   return (
     <div>
-      <ul className="mt-2 space-y-2">
+      <ul className="mt-2 list-none space-y-2 ps-0">
         {data.map((s) => (
-          <li key={s.id} className="list-none">
+          <li key={s.id}>
             <SingleScope scope={s} />
           </li>
         ))}
