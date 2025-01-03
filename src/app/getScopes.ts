@@ -36,13 +36,16 @@ export async function getScopes() {
 
     const $ = cheerio.load(initialHtml);
 
-    const today = new Date().toLocaleDateString("fi-FI", {
-      day: "2-digit",
-      month: "2-digit",
-    });
+    const today = new Date()
+      .toLocaleDateString("fi-FI", {
+        day: "2-digit",
+        month: "2-digit",
+      })
+      .replace(/\b0/g, "");
     const targetLink = $("h2.teaser-m__title")
       .filter((_i, el) => {
         const text = $(el).text();
+        console.log("text", text, "today", today);
         return (
           text.match(/Päivän horoskooppi .* \d{1,2}\.\d{1,2}\./) !== null &&
           text.includes(today)
