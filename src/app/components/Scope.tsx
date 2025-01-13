@@ -34,14 +34,21 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
         <h2 className={`text-lg font-medium uppercase ${isFav ? "text-blue-400" : "text-white"}`}>{scope.sign}</h2>
         <button
           onClick={handleCopy}
-          className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-zinc-400 hover:text-white"
+          className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-zinc-400 hover:text-white relative"
           title="Copy to clipboard"
         >
-          {copied ? (
-            <CheckIcon className="w-5 h-5 text-green-500" />
-          ) : (
-            <ClipboardDocumentIcon className="w-5 h-5" />
-          )}
+          <div className="relative">
+            <CheckIcon 
+              className={`w-5 h-5 text-green-500 absolute transition-all duration-200 ${
+                copied ? "opacity-100 scale-100" : "opacity-0 scale-75"
+              }`} 
+            />
+            <ClipboardDocumentIcon 
+              className={`w-5 h-5 transition-all duration-200 ${
+                copied ? "opacity-0 scale-75" : "opacity-100 scale-100"
+              }`} 
+            />
+          </div>
         </button>
       </div>
       <p className="text-zinc-400 text-sm leading-relaxed">{scope.scope}</p>
