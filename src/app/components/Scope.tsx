@@ -23,22 +23,28 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
   return (
     <div
       onClick={() => setSignId(scope.signId)}
-      className={`${isFav ? "text-blue-400" : ""} cursor-pointer hover:text-red-400 group relative`}
-      title={isFav ? "You have favorited this sign" : "Click to favorite"}
+      className={`relative pb-4 px-4 cursor-pointer transition-all rounded-lg group hover:bg-white/5 ${
+        isFav 
+          ? "ring-1 ring-blue-500" 
+          : ""
+      }`}
+      title={isFav ? "This is your favorited sign" : "Click to favorite"}
     >
-      <h2 className="font-bold uppercase">{scope.sign}</h2>
-      <p>{scope.scope}</p>
-      <button
-        onClick={handleCopy}
-        className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity text-white hover:scale-110 hover:text-blue-400"
-        title="Copy to clipboard"
-      >
-        {copied ? (
-          <CheckIcon className="w-5 h-5 text-green-500" />
-        ) : (
-          <ClipboardDocumentIcon className="w-5 h-5" />
-        )}
-      </button>
+      <div className="flex justify-between items-center mb-2">
+        <h2 className={`text-lg font-medium uppercase ${isFav ? "text-blue-400" : "text-white"}`}>{scope.sign}</h2>
+        <button
+          onClick={handleCopy}
+          className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-zinc-400 hover:text-white"
+          title="Copy to clipboard"
+        >
+          {copied ? (
+            <CheckIcon className="w-5 h-5 text-green-500" />
+          ) : (
+            <ClipboardDocumentIcon className="w-5 h-5" />
+          )}
+        </button>
+      </div>
+      <p className="text-zinc-400 text-sm leading-relaxed">{scope.scope}</p>
     </div>
   );
 };
