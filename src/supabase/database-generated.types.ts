@@ -128,7 +128,18 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      get_scopes_by_locale: {
+        Args: {
+          locale_param: string
+        }
+        Returns: {
+          id: number
+          date: string
+          scope: string
+          signId: number
+          sign: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
