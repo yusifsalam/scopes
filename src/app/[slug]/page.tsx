@@ -27,6 +27,9 @@ export async function generateStaticParams() {
 async function getMedia(sign: string) {
   const supabase = await createClient("admin");
   const { data: files } = await supabase.storage.from("pics").list(sign);
+  if (files?.[0]?.name === ".emptyFolderPlaceholder") {
+    return [];
+  }
   const paths =
     files
       ?.sort(
@@ -46,8 +49,9 @@ async function getMedia(sign: string) {
   return data;
 }
 
-const BullPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const sign = (await params).slug;
+const SignPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const resolvedParams = await params;
+  const sign = resolvedParams.slug;
   const urls = await getMedia(sign);
   return (
     <div className="stretch prose mx-auto flex w-full max-w-md flex-col px-4 py-8">
@@ -66,18 +70,28 @@ const BullPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
       </div>
       <div className="flex flex-col space-y-4">
         <Breadcrumbs sign={sign} />
-        {urls.map((d, i) =>
-          d.path?.includes("webp") ? (
-            <Image key={i} src={d.signedUrl} alt="" height={480} width={640} />
-          ) : (
-            <Image
-              key={i}
-              src={d.signedUrl}
-              alt=""
-              height={1024}
-              width={1024}
-            />
-          ),
+        {urls.length === 0 ? (
+          <p>No images for {sign} yet!</p>
+        ) : (
+          urls.map((d, i) =>
+            d.path?.includes("webp") ? (
+              <Image
+                key={i}
+                src={d.signedUrl}
+                alt=""
+                height={480}
+                width={640}
+              />
+            ) : (
+              <Image
+                key={i}
+                src={d.signedUrl}
+                alt=""
+                height={1024}
+                width={1024}
+              />
+            ),
+          )
         )}
         <Breadcrumbs sign={sign} />
       </div>
@@ -85,4 +99,4 @@ const BullPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 };
 
-export default BullPage;
+export default SignPage;
