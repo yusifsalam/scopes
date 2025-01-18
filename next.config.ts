@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       { source: "/vesimies", destination: "/aquarius" },
       { source: "/kalat", destination: "/pisces" },
       { source: "/oinas", destination: "/aries" },
-      { source: "/härkä", destination: "/taurus" },
+      { source: "/h%C3%A4rk%C3%A4", destination: "/taurus" },
       { source: "/kaksoset", destination: "/gemini" },
       { source: "/rapu", destination: "/cancer" },
       { source: "/leijona", destination: "/leo" },
