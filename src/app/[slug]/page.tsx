@@ -1,7 +1,8 @@
 import { createClient } from "@/supabase/server";
 import { createClient as supaClient } from "@supabase/supabase-js";
-import LocaleSelector from "../components/LocaleSelector";
 import Image from "next/image";
+import LocaleSelector from "../components/LocaleSelector";
+import Breadcrumbs from "./Breadcrumbs";
 
 export async function generateStaticParams() {
   const supabase = supaClient(
@@ -59,11 +60,12 @@ const BullPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
             day: "numeric",
             year: "numeric",
           })}
-          : Bull
+          : {sign}
         </h1>
         <LocaleSelector />
       </div>
       <div className="flex flex-col space-y-4">
+        <Breadcrumbs sign={sign} />
         {urls.map((d, i) =>
           d.path?.includes("webp") ? (
             <Image key={i} src={d.signedUrl} alt="" height={480} width={640} />
@@ -77,6 +79,7 @@ const BullPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
             />
           ),
         )}
+        <Breadcrumbs sign={sign} />
       </div>
     </div>
   );
