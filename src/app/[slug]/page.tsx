@@ -37,19 +37,19 @@ async function getMedia(sign: string) {
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
       )
       .map((d) => `${sign}/${d.name}`) ?? [];
-  const { data, error } = await supabase.storage
-    .from("pics")
-    .createSignedUrls(paths, 30 * 24 * 60 * 60); // 30 days
-
-  if (error) {
-    console.error("Error fetching images:", error);
-    return [];
-  }
+  const urls = paths.map((path) =>
+    supabase.storage.from("pics").getPublicUrl(path),
+  );
+  const data = urls.map((u) => u.data.publicUrl);
 
   return data;
 }
 
-const SignPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const SignPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string; url: string }>;
+}) => {
   const resolvedParams = await params;
   const sign = resolvedParams.slug;
   const urls = await getMedia(sign);
@@ -73,25 +73,9 @@ const SignPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
         {urls.length === 0 ? (
           <p>No images for {sign} yet!</p>
         ) : (
-          urls.map((d, i) =>
-            d.path?.includes("webp") ? (
-              <Image
-                key={i}
-                src={d.signedUrl}
-                alt=""
-                height={480}
-                width={640}
-              />
-            ) : (
-              <Image
-                key={i}
-                src={d.signedUrl}
-                alt=""
-                height={1024}
-                width={1024}
-              />
-            ),
-          )
+          urls.map((d, i) => (
+            <Image key={i} src={d} alt="" height={1024} width={1024} />
+          ))
         )}
         <Breadcrumbs sign={sign} />
       </div>
