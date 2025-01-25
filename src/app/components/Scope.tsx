@@ -38,7 +38,7 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center">
           <h2
-            className={`text-lg font-medium uppercase ${isFav ? "text-blue-400" : "text-white"}`}
+            className={`text-lg font-medium uppercase ${isFav ? "text-blue-400" : "text-base-content"}`}
           >
             <Link href={`/${scope.sign}`} className="not-prose">
               {scope.sign}
@@ -46,7 +46,7 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
           </h2>
           <button
             onClick={() => setSignId(scope.signId)}
-            className="relative mb-[1em] mt-[2em] pl-1 text-zinc-400 opacity-0 transition-all duration-200 hover:text-white group-hover:opacity-100"
+            className="relative mt-[2em] mb-[1em] pl-1 text-zinc-400 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:text-white"
             title="Click to favorite"
           >
             <div className="relative">
@@ -65,7 +65,7 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
         </div>
         <button
           onClick={handleCopy}
-          className="relative text-zinc-400 opacity-0 transition-all duration-200 hover:text-white group-hover:opacity-100"
+          className="relative text-zinc-400 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:text-white"
           title="Copy to clipboard"
         >
           <div className="relative">
