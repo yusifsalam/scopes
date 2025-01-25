@@ -27,7 +27,7 @@ const LocaleButton = ({ locale }: { locale: SupportedLocale }) => {
   return (
     <button
       onClick={() => setLocale(locale)}
-      className={`rounded px-2 py-1 uppercase transition-all ${
+      className={`cursor-pointer rounded px-2 py-1 uppercase transition-all ${
         currentLocale === locale
           ? "bg-blue-500 text-white"
           : "text-base-content hover:text-white"
