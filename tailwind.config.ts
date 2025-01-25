@@ -15,8 +15,5 @@ export default {
       },
     },
   },
-  daisyui: {
-    themes: ["black", "winter"],
-  },
   plugins: [typography],
 } satisfies Config;
