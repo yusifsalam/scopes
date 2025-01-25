@@ -19,7 +19,7 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
 
   const isFav = scope.signId === signId;
 
-  const handleCopy = (e: React.MouseEvent) => {
+  const handleCopy = () => {
     navigator.clipboard.writeText(
       `${scope.sign.toUpperCase()}\n${scope.scope}`,
     );
