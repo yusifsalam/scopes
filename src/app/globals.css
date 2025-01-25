@@ -4,8 +4,7 @@
     winter --default,
     black --prefersdark;
 }
-
-@config '../../tailwind.config.ts';
+@plugin "@tailwindcss/typography";
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
