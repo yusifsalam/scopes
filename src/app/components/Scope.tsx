@@ -20,7 +20,6 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
   const isFav = scope.signId === signId;
 
   const handleCopy = (e: React.MouseEvent) => {
-    e.stopPropagation();
     navigator.clipboard.writeText(
       `${scope.sign.toUpperCase()}\n${scope.scope}`,
     );
@@ -33,7 +32,6 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
       className={`group relative cursor-pointer rounded-lg px-4 pb-4 transition-all hover:bg-white/5 ${
         isFav ? "ring-1 ring-blue-500" : ""
       }`}
-      title={isFav ? "This is your favorited sign" : "Click to favorite"}
     >
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center">
@@ -46,26 +44,24 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
           </h2>
           <button
             onClick={() => setSignId(scope.signId)}
-            className="relative mt-[2em] mb-[1em] pl-1 text-zinc-400 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:text-white"
-            title="Click to favorite"
+            className="relative mt-[2em] mb-[1em] cursor-pointer pl-1 opacity-0 transition-all duration-200 group-hover:opacity-100"
+            title={isFav ? "This is your favorited sign" : "Click to favorite"}
           >
-            <div className="relative">
-              <SolidHeartIcon
-                className={`absolute h-5 w-5 text-red-500 transition-all duration-200 ${
-                  isFav ? "scale-100 opacity-100" : "scale-75 opacity-0"
-                }`}
-              />
-              <HeartIcon
-                className={`h-5 w-5 transition-all duration-200 hover:text-red-500 ${
-                  isFav ? "scale-75 opacity-0" : "scale-100 opacity-100"
-                }`}
-              />
-            </div>
+            <SolidHeartIcon
+              className={`absolute h-5 w-5 text-red-500 transition-all duration-200 ${
+                isFav ? "scale-100 opacity-100" : "scale-75 opacity-0"
+              }`}
+            />
+            <HeartIcon
+              className={`h-5 w-5 transition-all duration-200 hover:text-red-500 ${
+                isFav ? "scale-75 opacity-0" : "scale-100 opacity-100"
+              }`}
+            />
           </button>
         </div>
         <button
           onClick={handleCopy}
-          className="relative text-zinc-400 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:text-white"
+          className="relative cursor-pointer opacity-0 transition-all duration-200 group-hover:opacity-100"
           title="Copy to clipboard"
         >
           <div className="relative">
@@ -82,7 +78,7 @@ const SingleScope = ({ scope }: { scope: Scope }) => {
           </div>
         </button>
       </div>
-      <p className="text-sm leading-relaxed text-zinc-400">{scope.scope}</p>
+      <p className="text-base-content text-sm leading-relaxed">{scope.scope}</p>
     </div>
   );
 };

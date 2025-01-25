@@ -22,15 +22,13 @@ const Scopes = ({ scopeData }: ScopesProps) => {
   }
 
   return (
-    <div className="min-h-[80vh] h-full">
-      <ul className="mt-2 list-none space-y-2 ps-0">
-        {data.map((s) => (
-          <li key={s.id}>
-            <SingleScope scope={s} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="mt-2 list-none space-y-2 ps-0">
+      {data.map((s) => (
+        <li key={s.id}>
+          <SingleScope scope={s} />
+        </li>
+      ))}
+    </ul>
   );
 };
 

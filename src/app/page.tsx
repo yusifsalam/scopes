@@ -7,13 +7,14 @@ import Scopes from "./components/Scopes";
 async function getScopes() {
   const supabase = await createClient();
   const locales: SupportedLocale[] = ["re", "en", "fi"];
-  
+
   const scopesByLocale = await Promise.all(
     locales.map(async (locale) => {
-      const { data } = await supabase
-        .rpc('get_scopes_by_locale', { locale_param: locale });
+      const { data } = await supabase.rpc("get_scopes_by_locale", {
+        locale_param: locale,
+      });
       return [locale, data] as const;
-    })
+    }),
   );
 
   return Object.fromEntries(scopesByLocale) as Record<SupportedLocale, Scope[]>;
@@ -24,7 +25,7 @@ export default async function IndexPage() {
 
   return (
     <div className="prose stretch mx-auto flex w-full max-w-md flex-col px-4 py-8">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1>
           Rektor &apos;scopes
           <br />
@@ -36,7 +37,9 @@ export default async function IndexPage() {
         </h1>
         <LocaleSelector />
       </div>
-      <Scopes scopeData={scopeData} />
+      <div className="min-h-[80vh]">
+        <Scopes scopeData={scopeData} />
+      </div>
     </div>
   );
 }
