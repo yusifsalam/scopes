@@ -1,9 +1,8 @@
-import { createClient } from "@/supabase/server";
 import { createClient as supaClient } from "@supabase/supabase-js";
-import Image from "next/image";
 import Header from "../components/layout/Header";
-import LocaleSelector from "../components/LocaleSelector";
 import Breadcrumbs from "./Breadcrumbs";
+import { getMedia } from "./getMedia";
+import ImageGallery from "./ImageGallery";
 
 export async function generateStaticParams() {
   const supabase = supaClient(
@@ -25,26 +24,7 @@ export async function generateStaticParams() {
   }));
 }
 
-async function getMedia(sign: string) {
-  const supabase = await createClient("admin");
-  const { data: files } = await supabase.storage.from("pics").list(sign);
-  if (files?.[0]?.name === ".emptyFolderPlaceholder") {
-    return [];
-  }
-  const paths =
-    files
-      ?.sort(
-        (a, b) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-      )
-      .map((d) => `${sign}/${d.name}`) ?? [];
-  const urls = paths.map((path) =>
-    supabase.storage.from("pics").getPublicUrl(path),
-  );
-  const data = urls.map((u) => u.data.publicUrl);
 
-  return data;
-}
 
 const SignPage = async ({
   params,
@@ -59,17 +39,12 @@ const SignPage = async ({
       <Header sign={sign} />
       <div className="flex flex-col space-y-4">
         <Breadcrumbs sign={sign} />
-        {urls.length === 0 ? (
-          <p>No images for {sign} yet!</p>
-        ) : (
-          urls.map((d, i) => (
-            <Image key={i} src={d} alt="" height={1024} width={1024} />
-          ))
-        )}
+        <ImageGallery sign={sign} urls={urls}/>
         <Breadcrumbs sign={sign} />
       </div>
     </div>
   );
 };
+
 
 export default SignPage;
