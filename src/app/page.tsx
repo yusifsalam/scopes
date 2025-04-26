@@ -3,6 +3,7 @@ import type { SupportedLocale } from "./components/LocaleSelector";
 import LocaleSelector from "./components/LocaleSelector";
 import type { Scope } from "./components/Scope";
 import Scopes from "./components/Scopes";
+import Header from "./components/layout/Header";
 
 async function getScopes() {
   const supabase = await createClient();
@@ -26,15 +27,7 @@ export default async function IndexPage() {
   return (
     <div className="prose stretch mx-auto flex w-full max-w-md flex-col px-4 py-8">
       <div className="flex items-center justify-between">
-        <h1>
-          Rektor &apos;scopes
-          <br />
-          {new Date().toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </h1>
+        <Header />
         <LocaleSelector />
       </div>
       <div className="min-h-[80vh]">

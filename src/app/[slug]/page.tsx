@@ -1,6 +1,7 @@
 import { createClient } from "@/supabase/server";
 import { createClient as supaClient } from "@supabase/supabase-js";
 import Image from "next/image";
+import Header from "../components/layout/Header";
 import LocaleSelector from "../components/LocaleSelector";
 import Breadcrumbs from "./Breadcrumbs";
 
@@ -56,16 +57,7 @@ const SignPage = async ({
   return (
     <div className="stretch prose mx-auto flex w-full max-w-md flex-col px-4 py-8">
       <div className="flex items-center justify-between">
-        <h1>
-          Rektor &apos;scopes
-          <br />
-          {new Date().toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
-          : {sign}
-        </h1>
+        <Header sign={sign} />
         <LocaleSelector />
       </div>
       <div className="flex flex-col space-y-4">
