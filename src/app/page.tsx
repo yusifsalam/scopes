@@ -1,11 +1,10 @@
 import { createClient } from "@/supabase/server";
 import type { SupportedLocale } from "./components/LocaleSelector";
-import LocaleSelector from "./components/LocaleSelector";
 import type { Scope } from "./components/Scope";
 import Scopes from "./components/Scopes";
 import Header from "./components/layout/Header";
 
-export const dynamic = 'force-static'
+export const dynamic = "force-static";
 
 async function getScopes() {
   const supabase = await createClient();
