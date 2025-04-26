@@ -4,6 +4,7 @@ import { ZodiacSign } from "../consts";
 import Breadcrumbs from "./Breadcrumbs";
 import { getHistory } from "./getHistory";
 import { getMedia } from "./getMedia";
+import History from "./History";
 import ImageGallery from "./ImageGallery";
 import Tabs, { Tab } from "./Tabs";
 
@@ -45,7 +46,7 @@ const SignPage = async ({
     },
     {
       label: "History",
-      content: <h2>Historical scopes for {sign}</h2>,
+      content: <History data={history} sign={sign} />,
     },
     {
       label: "Gallery",
