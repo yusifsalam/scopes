@@ -56,10 +56,7 @@ const SignPage = async ({
   const urls = await getMedia(sign);
   return (
     <div className="stretch prose mx-auto flex w-full max-w-md flex-col px-4 py-8">
-      <div className="flex items-center justify-between">
-        <Header sign={sign} />
-        <LocaleSelector />
-      </div>
+      <Header sign={sign} />
       <div className="flex flex-col space-y-4">
         <Breadcrumbs sign={sign} />
         {urls.length === 0 ? (

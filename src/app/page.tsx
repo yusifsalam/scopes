@@ -26,10 +26,7 @@ export default async function IndexPage() {
 
   return (
     <div className="prose stretch mx-auto flex w-full max-w-md flex-col px-4 py-8">
-      <div className="flex items-center justify-between">
-        <Header />
-        <LocaleSelector />
-      </div>
+      <Header />
       <div className="min-h-[80vh]">
         <Scopes scopeData={scopeData} />
       </div>
