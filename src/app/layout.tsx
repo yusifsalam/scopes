@@ -18,7 +18,7 @@ export default function RootLayout({
       <head>
         <meta name="robots" content="noindex" />
       </head>
-      <body className="antialiased">
+      <body className="flex min-h-screen flex-col justify-between antialiased">
         <UserPreferencesStoreProvider>{children}</UserPreferencesStoreProvider>
         <Footer />
       </body>
