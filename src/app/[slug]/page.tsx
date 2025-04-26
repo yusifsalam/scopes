@@ -54,11 +54,13 @@ const SignPage = async ({
     },
   ];
   return (
-    <div className="stretch prose mx-auto flex w-full max-w-md flex-col px-4 py-8">
+    <div className="prose mx-auto flex w-full max-w-md grow flex-col px-4 py-8">
       <Header sign={sign} />
-      <div className="flex flex-col space-y-4">
+      <div className="flex max-w-md grow flex-col space-y-4">
         <Breadcrumbs sign={sign} />
-        <Tabs tabs={tabs} />
+        <div className="grow self-center sm:-mx-20 md:-mx-30">
+          <Tabs tabs={tabs} />
+        </div>
         <Breadcrumbs sign={sign} />
       </div>
     </div>
