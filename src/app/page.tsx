@@ -5,6 +5,8 @@ import type { Scope } from "./components/Scope";
 import Scopes from "./components/Scopes";
 import Header from "./components/layout/Header";
 
+export const dynamic = 'force-static'
+
 async function getScopes() {
   const supabase = await createClient();
   const locales: SupportedLocale[] = ["re", "en", "fi"];
