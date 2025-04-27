@@ -13,7 +13,7 @@ const ScopeToday = ({ scope }: { scope: string }) => {
 
   return (
     <div>
-      <h2>Today's Horoscope</h2>
+      <h2>Today&apos;s Horoscope</h2>
       <ScopeWithSentiment scope={scope} />
       <p>
         <strong>Overall Sentiment: {sentiment}</strong> ({totalSentimentScore})
