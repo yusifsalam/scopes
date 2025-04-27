@@ -6,6 +6,7 @@ import { getHistory } from "./getHistory";
 import { getMedia } from "./getMedia";
 import History from "./History";
 import ImageGallery from "./ImageGallery";
+import ScopeToday from "./ScopeToday";
 import Tabs, { Tab } from "./Tabs";
 
 export async function generateStaticParams() {
@@ -41,7 +42,7 @@ const SignPage = async ({
   const tabs: Tab[] = [
     {
       label: "Today",
-      content: <h2>{history[0].scope}</h2>,
+      content: <ScopeToday scope={history[0].scope} />,
       defaultChecked: true,
     },
     {
