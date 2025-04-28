@@ -4,8 +4,8 @@ const SettingsMenu = () => {
   return (
     <div className="drawer drawer-end">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex">
-        <label htmlFor="my-drawer-4" className="drawer-button btn mr-4 ml-auto">
+      <div className="fixed right-4 bottom-4 z-10">
+        <label htmlFor="my-drawer-4" className="drawer-button btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -22,7 +22,7 @@ const SettingsMenu = () => {
           </svg>
         </label>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-20">
         <label
           htmlFor="my-drawer-4"
           aria-label="close sidebar"
