@@ -1,9 +1,15 @@
+"use client";
+
+import { useUserPreferencesStore } from "../state/user-preferences-provider";
 import { calculateAfinnScore } from "../utils/sentiment";
 import ScopeWithSentiment from "./ScopeWithSentiment";
 
 const ScopeToday = ({ scope }: { scope: string }) => {
-  const totalSentimentScore = calculateAfinnScore(scope);
+  const { sentiment: showSentiment } = useUserPreferencesStore(
+    (state) => state,
+  );
 
+  const totalSentimentScore = calculateAfinnScore(scope);
   const sentiment =
     totalSentimentScore === 0
       ? "neutral"
@@ -14,10 +20,18 @@ const ScopeToday = ({ scope }: { scope: string }) => {
   return (
     <div>
       <h2>Today&apos;s Horoscope</h2>
-      <ScopeWithSentiment scope={scope} />
-      <p>
-        <strong>Overall Sentiment: {sentiment}</strong> ({totalSentimentScore})
-      </p>
+
+      {showSentiment ? (
+        <>
+          <ScopeWithSentiment scope={scope} />
+          <p>
+            <strong>Overall Sentiment: {sentiment}</strong> (
+            {totalSentimentScore})
+          </p>
+        </>
+      ) : (
+        <p>{scope}</p>
+      )}
     </div>
   );
 };

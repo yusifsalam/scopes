@@ -8,9 +8,7 @@ const Header = ({ sign }: HeaderProps) => {
   return (
     <header className="flex items-center justify-between py-6">
       <div>
-        <h1 className="text-3xl font-bold">
-          Rektor &apos;scopes
-        </h1>
+        <h1 className="text-3xl font-bold">Rektor &apos;scopes</h1>
         <p className="text-base text-gray-400">
           {new Date().toLocaleDateString("en-US", {
             month: "short",
@@ -18,7 +16,7 @@ const Header = ({ sign }: HeaderProps) => {
             year: "numeric",
           })}
           {sign && (
-            <span className="capitalize font-semibold text-gray-300">
+            <span className="font-semibold text-gray-300 capitalize">
               : {sign}
             </span>
           )}

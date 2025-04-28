@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { UserPreferencesStoreProvider } from "./state/user-preferences-provider";
-import "./globals.css";
 import Footer from "./components/layout/Footer";
+import SettingsMenu from "./components/SettingsMenu";
+import "./globals.css";
+import { UserPreferencesStoreProvider } from "./state/user-preferences-provider";
 
 export const metadata: Metadata = {
   title: "Daily 'scopes",
@@ -19,7 +20,10 @@ export default function RootLayout({
         <meta name="robots" content="noindex" />
       </head>
       <body className="flex min-h-screen flex-col justify-between antialiased">
-        <UserPreferencesStoreProvider>{children}</UserPreferencesStoreProvider>
+        <UserPreferencesStoreProvider>
+          {children}
+          <SettingsMenu />
+        </UserPreferencesStoreProvider>
         <Footer />
       </body>
     </html>
