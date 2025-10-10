@@ -31,7 +31,7 @@ export async function getScopes() {
         const text = $(el).text();
         console.log("text", text, "today", today);
         return (
-          text.match(/Päivän horoskooppi .* \d{1,2}\.\d{1,2}\./) !== null &&
+          text.match(/(Päivän|Me Naisten)\s+horoskooppi.*?(\d{1,2}\.\d{1,2})/) !== null &&
           text.includes(today)
         );
       })
