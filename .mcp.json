@@ -10,6 +10,7 @@
       "env": {}
     },
     "ai-sdk-5-migration": {
+      "type": "http",
       "url": "https://ai-sdk-5-migration-mcp-server.vercel.app/api/mcp"
     }
   }
